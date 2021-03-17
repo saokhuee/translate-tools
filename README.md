@@ -1,7 +1,19 @@
-1. Create a virtual environment for python
-   https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
+## Require
 
-##USAGE
+- Cài đặt Python
+- Tạo môi trường ảo hóa https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
+
+## Hướng dẫn chuyển từ excel đã dịch sang yaml
+
+**Bước 1**: Tải file yaml nguồn chưa dịch đặt ở trong thư mục `data`
+
+**Bước 2**: Tải file excel từ google sheet đặt ở trong thư mục `data`
+
+**Bước 3**: Thự thi lệnh `python excelToYaml.py <source filename> <destination filename> <excel filename>`
+
+Ví dụ: `python excelToYaml.py en-GB.yml vi-VN.yml canvas.xlsx`
+
+## Hướng dẫn chuyển yaml sang excel để đẩy lên google sheet
 
 Start from `jsonToExcel.py` file:
 

@@ -1,5 +1,6 @@
 import pandas as pd
 import yaml
+import sys
 
 def parseYAML(data, dataFrame, path):
   if type(data) is dict:
@@ -21,13 +22,20 @@ def replaceData(data, key, dataFrame, path):
   print(path)
   search = dataFrame.loc[dataFrame['key'] == path].values
   if len(search) > 0:
-    data[key] = search[0][1]
+    data[key] = search[0][2]
 
-xl_file = pd.ExcelFile("./Book1.xlsx")
-df = xl_file.parse("Sheet1")
 
-with open("en-GB.yml", 'r', encoding="utf8") as file:
-  data = yaml.safe_load(file)
-  parseYAML(data, df, "")
-  with open('vi-VN.yml', 'w', encoding="utf8") as outfile:
-    yaml.dump(data, outfile, default_flow_style=False, allow_unicode=True)
+
+if __name__ == "__main__":
+  sourceFilename = sys.argv[1]
+  destinationFilename = sys.argv[2]
+  excelFilename = sys.argv[3]
+
+  xlFile = pd.ExcelFile("./data/" + excelFilename)
+  df = xlFile.parse(sourceFilename)
+
+  with open("./data/" + sourceFilename, 'r', encoding="utf8") as file:
+    data = yaml.safe_load(file)
+    parseYAML(data, df, "")
+    with open("./data/" + destinationFilename, 'w', encoding="utf8") as outfile:
+      yaml.dump(data, outfile, default_flow_style=False, allow_unicode=True)
